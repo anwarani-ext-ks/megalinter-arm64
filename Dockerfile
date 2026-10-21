@@ -64,11 +64,11 @@ ARG TERRAFORM_TOFU_FMT_VERSION=1.12.6-minimal
 #FROM__START
 FROM alpine:3.24 AS cargo-bin-sarif-fmt
 
-# CERT
-ADD https://artifactory.query.prod.devops-01.kstg.corp/artifactory/devops_generic/scripts/install_certs_alpine.sh /tmp/install_certs_alpine.sh
-RUN chmod u+x /tmp/install_certs_alpine.sh \
-    && /tmp/install_certs_alpine.sh \
-    && rm /tmp/install_certs_alpine.sh
+# # CERT
+# ADD https://artifactory.query.prod.devops-01.kstg.corp/artifactory/devops_generic/scripts/install_certs_alpine.sh /tmp/install_certs_alpine.sh
+# RUN chmod u+x /tmp/install_certs_alpine.sh \
+#     && /tmp/install_certs_alpine.sh \
+#     && rm /tmp/install_certs_alpine.sh
 
 ARG CARGO_SARIF_FMT_VERSION
 RUN set -eu; \
@@ -81,11 +81,11 @@ FROM rhysd/actionlint:${ACTION_ACTIONLINT_VERSION} AS actionlint
 FROM koalaman/shellcheck:${BASH_SHELLCHECK_VERSION} AS shellcheck
 FROM alpine:3.24 AS cargo-bin-zizmor
 
-# CERT
-ADD https://artifactory.query.prod.devops-01.kstg.corp/artifactory/devops_generic/scripts/install_certs_alpine.sh /tmp/install_certs_alpine.sh
-RUN chmod u+x /tmp/install_certs_alpine.sh \
-    && /tmp/install_certs_alpine.sh \
-    && rm /tmp/install_certs_alpine.sh
+# # CERT
+# ADD https://artifactory.query.prod.devops-01.kstg.corp/artifactory/devops_generic/scripts/install_certs_alpine.sh /tmp/install_certs_alpine.sh
+# RUN chmod u+x /tmp/install_certs_alpine.sh \
+#     && /tmp/install_certs_alpine.sh \
+#     && rm /tmp/install_certs_alpine.sh
 
 ARG CARGO_ZIZMOR_VERSION
 RUN set -eu; \
@@ -95,11 +95,11 @@ RUN set -eu; \
     chmod +x /out/bin/zizmor
 FROM alpine:3.24 AS cargo-bin-shellcheck-sarif
 
-# CERT
-ADD https://artifactory.query.prod.devops-01.kstg.corp/artifactory/devops_generic/scripts/install_certs_alpine.sh /tmp/install_certs_alpine.sh
-RUN chmod u+x /tmp/install_certs_alpine.sh \
-    && /tmp/install_certs_alpine.sh \
-    && rm /tmp/install_certs_alpine.sh
+# # CERT
+# ADD https://artifactory.query.prod.devops-01.kstg.corp/artifactory/devops_generic/scripts/install_certs_alpine.sh /tmp/install_certs_alpine.sh
+# RUN chmod u+x /tmp/install_certs_alpine.sh \
+#     && /tmp/install_certs_alpine.sh \
+#     && rm /tmp/install_certs_alpine.sh
 
 ARG CARGO_SHELLCHECK_SARIF_VERSION
 RUN set -eu; mkdir -p /out/bin; \
@@ -117,11 +117,11 @@ FROM golang:${GO_IMAGE_VERSION}-alpine AS revive
 ## The install command should then be what is commented in the go.megalinter-descriptor.yml
 ARG GO_REVIVE_VERSION
 
-# CERT
-ADD https://artifactory.query.prod.devops-01.kstg.corp/artifactory/devops_generic/scripts/install_certs_alpine.sh /tmp/install_certs_alpine.sh
-RUN chmod u+x /tmp/install_certs_alpine.sh \
-    && /tmp/install_certs_alpine.sh \
-    && rm /tmp/install_certs_alpine.sh
+# # CERT
+# ADD https://artifactory.query.prod.devops-01.kstg.corp/artifactory/devops_generic/scripts/install_certs_alpine.sh /tmp/install_certs_alpine.sh
+# RUN chmod u+x /tmp/install_certs_alpine.sh \
+#     && /tmp/install_certs_alpine.sh \
+#     && rm /tmp/install_certs_alpine.sh
 
 RUN GOBIN=/usr/bin go install github.com/mgechev/revive@$GO_REVIVE_VERSION
 FROM ghcr.io/yannh/kubeconform:${KUBERNETES_KUBECONFORM_VERSION} AS kubeconform
@@ -130,11 +130,11 @@ FROM alpine:3.24 AS cargo-bin-stylua
 ARG TARGETARCH
 ARG CARGO_STYLUA_VERSION
 
-# CERT
-ADD https://artifactory.query.prod.devops-01.kstg.corp/artifactory/devops_generic/scripts/install_certs_alpine.sh /tmp/install_certs_alpine.sh
-RUN chmod u+x /tmp/install_certs_alpine.sh \
-    && /tmp/install_certs_alpine.sh \
-    && rm /tmp/install_certs_alpine.sh
+# # CERT
+# ADD https://artifactory.query.prod.devops-01.kstg.corp/artifactory/devops_generic/scripts/install_certs_alpine.sh /tmp/install_certs_alpine.sh
+# RUN chmod u+x /tmp/install_certs_alpine.sh \
+#     && /tmp/install_certs_alpine.sh \
+#     && rm /tmp/install_certs_alpine.sh
 
 RUN set -eu; mkdir -p /out/bin; \
     apk add --no-cache curl ca-certificates unzip; \
@@ -152,11 +152,11 @@ FROM yoheimuta/protolint:${PROTOBUF_PROTOLINT_VERSION} AS protolint
 FROM golang:${GO_IMAGE_VERSION}-alpine AS dustilock
 ARG REPOSITORY_DUSTILOCK_VERSION
 
-# CERT
-ADD https://artifactory.query.prod.devops-01.kstg.corp/artifactory/devops_generic/scripts/install_certs_alpine.sh /tmp/install_certs_alpine.sh
-RUN chmod u+x /tmp/install_certs_alpine.sh \
-    && /tmp/install_certs_alpine.sh \
-    && rm /tmp/install_certs_alpine.sh
+# # CERT
+# ADD https://artifactory.query.prod.devops-01.kstg.corp/artifactory/devops_generic/scripts/install_certs_alpine.sh /tmp/install_certs_alpine.sh
+# RUN chmod u+x /tmp/install_certs_alpine.sh \
+#     && /tmp/install_certs_alpine.sh \
+#     && rm /tmp/install_certs_alpine.sh
 
 RUN GOBIN=/usr/bin go install github.com/checkmarx/dustilock@v${REPOSITORY_DUSTILOCK_VERSION}
 FROM ghcr.io/betterleaks/betterleaks:${REPOSITORY_BETTERLEAKS_VERSION} AS betterleaks
@@ -206,11 +206,11 @@ RUN python -c 'import sys; assert sys.version_info >= (3, 14, 7), "Python 3.14.7
     && python -m pip install --no-cache-dir "wheel>=0.46.2" "setuptools>=75.8.0" \
     && rm -rf /usr/local/lib/python3.13/site-packages/setuptools/_vendor/wheel*
 
-# CERT
-ADD https://artifactory.query.prod.devops-01.kstg.corp/artifactory/devops_generic/scripts/install_certs_alpine.sh /tmp/install_certs_alpine.sh
-RUN chmod u+x /tmp/install_certs_alpine.sh \
-    && /tmp/install_certs_alpine.sh \
-    && rm /tmp/install_certs_alpine.sh
+# # CERT
+# ADD https://artifactory.query.prod.devops-01.kstg.corp/artifactory/devops_generic/scripts/install_certs_alpine.sh /tmp/install_certs_alpine.sh
+# RUN chmod u+x /tmp/install_certs_alpine.sh \
+#     && /tmp/install_certs_alpine.sh \
+#     && rm /tmp/install_certs_alpine.sh
 
 #############################################################################################
 ## @generated by .automation/build.py using descriptor files, please do not update manually ##
@@ -582,11 +582,11 @@ RUN mkdir -p ${GOPATH}/src ${GOPATH}/bin || true && \
 ## @generated by .automation/build.py using descriptor files, please do not update manually ##
 #############################################################################################
 
-# CERT
-ADD https://artifactory.query.prod.devops-01.kstg.corp/artifactory/devops_generic/scripts/install_certs_alpine.sh /tmp/install_certs_alpine.sh
-RUN chmod u+x /tmp/install_certs_alpine.sh \
-    && /tmp/install_certs_alpine.sh \
-    && rm /tmp/install_certs_alpine.sh
+# # CERT
+# ADD https://artifactory.query.prod.devops-01.kstg.corp/artifactory/devops_generic/scripts/install_certs_alpine.sh /tmp/install_certs_alpine.sh
+# RUN chmod u+x /tmp/install_certs_alpine.sh \
+#     && /tmp/install_certs_alpine.sh \
+#     && rm /tmp/install_certs_alpine.sh
 
 #CARGO__START
 RUN export RUSTUP_HOME=/usr/local/rustup CARGO_HOME=/usr/local/cargo \
